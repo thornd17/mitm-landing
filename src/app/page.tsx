@@ -26,7 +26,7 @@ export default async function Page() {
         const data = await fetchPrograms();
 
         return (
-            <div className="2xl:max-w-[1440px] m-auto px-[16px] 2xl:px-[78px] mb-[40px] md:mb-[170px]">
+            <main className="2xl:max-w-[1440px] m-auto px-[16px] 2xl:px-[78px] mb-[40px] md:mb-[170px]">
                 <h1 className="font-medium md:font-bold text-[28px] md:text-4xl text-start md:text-center mt-[28px] md:mt-[72px]">
                     Специализированные дисциплины
                 </h1>
@@ -38,7 +38,7 @@ export default async function Page() {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-[32px] mt-[44px] md:mt-[120px]">
-                    <div className="px-[22px] md:px-[72px] py-[32px] md:py-[56px] bg-accent text-accent-foreground folded-corner-top">
+                    <article className="px-[22px] md:px-[72px] py-[32px] md:py-[56px] bg-accent text-accent-foreground folded-corner-top">
                         <h2 className="text-[25px] md:text-[36px] font-bold">
                             Практические модули
                         </h2>
@@ -46,8 +46,8 @@ export default async function Page() {
                             Работа над собственными проектами: практика
                             групповых взаимодействий, кейс-методы, эссе
                         </p>
-                    </div>
-                    <div className="px-[22px] md:px-[72px] py-[32px] md:py-[56px] bg-secondary text-secondary-foreground">
+                    </article>
+                    <article className="px-[22px] md:px-[72px] py-[32px] md:py-[56px] bg-secondary text-secondary-foreground">
                         <h2 className="text-[25px] md:text-[36px] font-bold">
                             Итоговая аттестация
                         </h2>
@@ -59,9 +59,9 @@ export default async function Page() {
                             </li>
                             <li>Защита итоговой аттестационной работы</li>
                         </ul>
-                    </div>
+                    </article>
                 </div>
-            </div>
+            </main>
         );
     } catch {
         return null;

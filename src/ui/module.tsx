@@ -69,6 +69,9 @@ export const Module = ({
             <div
                 ref={headerRef}
                 tabIndex={0}
+                role="button"
+                aria-expanded={isOpen}
+                aria-controls={`module-content-${title}`}
                 onClick={() => setIsOpen(!isOpen)}
                 onKeyDown={handleKeyDown}
                 className={cx(
@@ -85,9 +88,12 @@ export const Module = ({
                 </h3>
             </div>
             <ul
+                id={`module-content-${title}`}
+                aria-hidden={!isOpen}
                 className={cx(
-                    `flex flex-col gap-[10px] lg:mt-[36px] transition-all duration-300 overflow-hidden md:max-h-[500px]`,
-                    isOpen ? "max-h-[500px]" : "max-h-0"
+                    `flex flex-col gap-[10px] lg:mt-[36px] overflow-hidden md:max-h-[500px]`,
+                    isOpen ? "max-h-[500px]" : "max-h-0",
+                    "motion-safe:transition-all motion-safe:duration-300"
                 )}
             >
                 {model.map((value) => (
