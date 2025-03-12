@@ -1,103 +1,69 @@
-import Image from "next/image";
+"use server";
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+import { fetchPrograms } from "@/model";
+import { Section } from "@/ui/seciton";
+import { Metadata } from "next";
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+// export const generateMetadata Специализированные дисциплины
+
+export async function generateMetadata(): Promise<Metadata> {
+    const title = "Специализированные дисциплины";
+    const description =
+        "Специализированные дисциплины. Практические модули. Работа над собственными проектами: практика групповых взаимодействий, кейс-методы, эссе";
+
+    return {
+        title,
+        description,
+        openGraph: {
+            title,
+            description,
+        },
+    };
+}
+
+export default async function Page() {
+    try {
+        const data = await fetchPrograms();
+
+        return (
+            <div className="2xl:max-w-[1440px] m-auto px-[16px] 2xl:px-[78px] mb-[40px] md:mb-[170px]">
+                <h1 className="font-medium md:font-bold text-[28px] md:text-4xl text-start md:text-center mt-[28px] md:mt-[72px]">
+                    Специализированные дисциплины
+                </h1>
+
+                <div className="mt-[34px] md:mt-[90px] flex flex-col gap-[26px]">
+                    {data.map((program) => (
+                        <Section model={program} key={program.id} />
+                    ))}
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-[32px] mt-[44px] md:mt-[120px]">
+                    <div className="px-[22px] md:px-[72px] py-[32px] md:py-[56px] bg-accent text-accent-foreground folded-corner-top">
+                        <h2 className="text-[25px] md:text-[36px] font-bold">
+                            Практические модули
+                        </h2>
+                        <p className="text-[20px] font-light mt-[24px]">
+                            Работа над собственными проектами: практика
+                            групповых взаимодействий, кейс-методы, эссе
+                        </p>
+                    </div>
+                    <div className="px-[22px] md:px-[72px] py-[32px] md:py-[56px] bg-secondary text-secondary-foreground">
+                        <h2 className="text-[25px] md:text-[36px] font-bold">
+                            Итоговая аттестация
+                        </h2>
+                        <ul className="mt-[24px] text-[20px] font-light flex flex-col gap-[10px]">
+                            <li>
+                                Бизнес-проектирование (подготовка итоговой
+                                аттестационной работы, консультирование по
+                                бизнес-проектированию)
+                            </li>
+                            <li>Защита итоговой аттестационной работы</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        );
+    } catch {
+        return null;
+    }
 }

@@ -1,26 +1,154 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --primary: #fff;
+    --secondary: #2d2c2a;
+    --accent: #ff3535;
+    --primary-foreground: #000;
+    --secondary-foreground: #fff;
+    --accent-foreground: #fff;
+    --primary-muted: #f7f7f7;
+    --accent-muted: #cd1800;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@theme {
+    --color-primary: var(--primary);
+    --color-secondary: var(--secondary);
+    --color-accent: var(--accent);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-primary-muted: var(--primary-muted);
+    --color-accent-muted: var(--accent-muted);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@font-face {
+    font-family: "Styrene A Web";
+    src: url("/font/SyreneAWeb/StyreneAWeb-Light.eot");
+    src: local("Styrene A Web Light"), local("StyreneAWeb-Light"),
+        url("/font/SyreneAWeb/StyreneAWeb-Light.eot?#iefix")
+            format("embedded-opentype"),
+        url("/font/SyreneAWeb/StyreneAWeb-Light.woff2") format("woff2"),
+        url("/font/SyreneAWeb/StyreneAWeb-Light.woff") format("woff"),
+        url("/font/SyreneAWeb/StyreneAWeb-Light.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Styrene A Web";
+    src: url("/font/SyreneAWeb/StyreneAWeb-Regular.eot");
+    src: local("Styrene A Web Regular"), local("StyreneAWeb-Regular"),
+        url("/font/SyreneAWeb/StyreneAWeb-Regular.eot?#iefix")
+            format("embedded-opentype"),
+        url("/font/SyreneAWeb/StyreneAWeb-Regular.woff2") format("woff2"),
+        url("/font/SyreneAWeb/StyreneAWeb-Regular.woff") format("woff"),
+        url("/font/SyreneAWeb/StyreneAWeb-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Styrene A Web";
+    src: url("/font/SyreneAWeb/StyreneAWeb-Medium.eot");
+    src: local("Styrene A Web Medium"), local("StyreneAWeb-Medium"),
+        url("/font/SyreneAWeb/StyreneAWeb-Medium.eot?#iefix")
+            format("embedded-opentype"),
+        url("/font/SyreneAWeb/StyreneAWeb-Medium.woff2") format("woff2"),
+        url("/font/SyreneAWeb/StyreneAWeb-Medium.woff") format("woff"),
+        url("/font/SyreneAWeb/StyreneAWeb-Medium.ttf") format("truetype");
+    font-weight: medium;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Styrene A Web";
+    src: url("/font/SyreneAWeb/StyreneAWeb-Bold.eot");
+    src: local("Styrene A Web Bold"), local("StyreneAWeb-Bold"),
+        url("/font/SyreneAWeb/StyreneAWeb-Bold.eot?#iefix")
+            format("embedded-opentype"),
+        url("/font/SyreneAWeb/StyreneAWeb-Bold.woff2") format("woff2"),
+        url("/font/SyreneAWeb/StyreneAWeb-Bold.woff") format("woff"),
+        url("/font/SyreneAWeb/StyreneAWeb-Bold.ttf") format("truetype");
+    font-weight: bold;
+    font-style: normal;
+}
+
+*:focus {
+  outline: none;
+  @apply focus:outline-none focus:ring-2 focus:ring-accent;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    background: var(--primary);
+    color: var(--primary-foreground);
+    font-family: "Styrene A Web", Arial, Helvetica, sans-serif;
+    line-height: 1.2;
+}
+
+li {
+    list-style-type: none;
+    position: relative;
+    padding-left: 14px;
+}
+
+li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width: 5px;
+    height: 5px;
+    background-color: var(--accent);
+    border-radius: 50%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+*:focus {
+  outline: none;
+}
+
+.folded-corner-top {
+    position: relative;
+    overflow: hidden; /* Скрываем лишние части */
+    z-index: 1;
+}
+
+/* Треугольник с фоном (загнутая часть) */
+.folded-corner-top::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 50px 50px 0; /* Размер уголка */
+    border-color: transparent transparent var(--accent-muted) transparent; /* Черный цвет */
+    z-index: 3; /* Над всеми элементами */
+}
+
+.folded-corner-top::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 50px 50px 0; /* Немного больше, чтобы создать эффект тени */
+    border-color: transparent var(--primary) transparent transparent; /* Цвет фона */
+    z-index: 2; /* Под черным треугольником */
+}
+
+@media (max-width: 768px) {
+    .folded-corner-top::before {
+        border-width: 0 24px 24px 0; /* Размер уголка для экранов < md */
+    }
+
+    .folded-corner-top::after {
+        border-width: 0 24px 24px 0; /* Размер уголка для экранов < md */
+    }
 }
