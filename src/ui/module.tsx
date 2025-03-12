@@ -76,7 +76,7 @@ export const Module = ({
                     isOpen
                         ? "bg-accent text-accent-foreground"
                         : "bg-primary-muted",
-                    "md:focus:outline-none md:focus:ring-2 md:focus:ring-accent"
+                    "focus:ring-2 focus:ring-accent md:focus:ring-[none]"
                 )}
             >
                 <ToggleIcon isOpen={isOpen} className="size-[18px] md:hidden" />
