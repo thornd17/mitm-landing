@@ -73,11 +73,6 @@
     font-style: normal;
 }
 
-*:focus {
-  outline: none;
-  @apply focus:outline-none focus:ring-2 focus:ring-accent;
-}
-
 body {
     background: var(--primary);
     color: var(--primary-foreground);

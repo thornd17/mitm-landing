@@ -75,7 +75,8 @@ export const Module = ({
                     "flex items-center md:items-start gap-[24px] md:bg-transparent md:text-primary-foreground px-[24px] py-[16px] md:pt-[30px] md:border-t-2 md:border-t-accent cursor-pointer md:cursor-auto",
                     isOpen
                         ? "bg-accent text-accent-foreground"
-                        : "bg-primary-muted"
+                        : "bg-primary-muted",
+                    "md:focus:outline-none md:focus:ring-2 md:focus:ring-accent"
                 )}
             >
                 <ToggleIcon isOpen={isOpen} className="size-[18px] md:hidden" />

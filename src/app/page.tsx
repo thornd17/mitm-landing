@@ -1,7 +1,7 @@
 "use server";
 
 import { fetchPrograms } from "@/model";
-import { Section } from "@/ui/seciton";
+import { Section } from "@/ui/section";
 import { Metadata } from "next";
 
 // export const generateMetadata Специализированные дисциплины
